@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Calculator · Monica R. Amer</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/calculator.css" />
+  <link rel="icon" href="assets/icons/favicon.ico" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container nav-container">
+      <div class="nav-logo">Personal Profile<span></span></div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="section-card">
+    <div class="container">
+      <h2 class="section-title"><i class="fas fa-calculator"></i> Calculator</h2>
+      <div class="calculator-wrapper">
+        <div class="calculator" id="calculator">
+          <input type="text" id="display" class="calc-display" readonly />
+          <div class="calc-keys">
+            <button data-action="clear">C</button>
+            <button data-action="del">⌫</button>
+            <button data-action="percent">%</button>
+            <button data-value="/">÷</button>
+
+            <button data-value="7">7</button>
+            <button data-value="8">8</button>
+            <button data-value="9">9</button>
+            <button data-value="*">×</button>
+
+            <button data-value="4">4</button>
+            <button data-value="5">5</button>
+            <button data-value="6">6</button>
+            <button data-value="-">−</button>
+
+            <button data-value="1">1</button>
+            <button data-value="2">2</button>
+            <button data-value="3">3</button>
+            <button data-value="+">+</button>
+
+            <button data-value="0">0</button>
+            <button data-value=".">.</button>
+            <button data-action="equals" class="equals">=</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p><i class="far fa-copyright"></i> 2026 Monica R. Amer</p>
+    </div>
+  </footer>
+
+  <script src="js/calculator.js"></script>
+</body>
+</html>
