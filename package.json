@@ -1,0 +1,9 @@
+{
+  "name": "personal-profile-monicaamer",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "npx http-server -p 8081"
+  },
+  "author": "Monica Amer"
+}
