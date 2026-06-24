@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Monica R. Amer · About</title>
+  <title>Monica R. Amer · Home</title>
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
   <link rel="icon" href="assets/icons/favicon.ico" />
@@ -15,8 +15,8 @@
     <div class="container nav-container">
       <div class="nav-logo">MONICA R. AMER<span></span></div>
       <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html" class="active">About</a></li>
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="about.html">About</a></li>
         <li><a href="skills.html">Skills</a></li>
         <li><a href="education.html">Education</a></li>
         <li><a href="experience.html">Experience</a></li>
@@ -29,56 +29,93 @@
     </div>
   </nav>
 
-  <!-- ====== ABOUT SECTION ====== -->
+  <!-- ====== HERO SECTION ====== -->
+  <section class="hero">
+    <div class="container hero-content">
+      <div class="hero-avatar">
+        <i class="fas fa-user-circle"></i>
+      </div>
+      <h1>Monica R. Amer</h1>
+      <p class="subtitle">Computer Science Student</p>
+      <p class="institution"><i class="fas fa-university"></i> DMMMSU – SLUC</p>
+      <div class="hero-buttons">
+        <a href="about.html" class="btn btn-primary"><i class="fas fa-user"></i> View Profile</a>
+        <a href="contact.html" class="btn btn-accent"><i class="fas fa-envelope"></i> Contact Me</a>
+        <a href="portfolio.html" class="btn btn-secondary"><i class="fas fa-project-diagram"></i> View Projects</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== QUICK STATS ====== -->
+  <section class="stats">
+    <div class="container stats-grid">
+      <div class="stat-item">
+        <i class="fas fa-graduation-cap"></i>
+        <span class="stat-number">4</span>
+        <span class="stat-label">Education Levels</span>
+      </div>
+      <div class="stat-item">
+        <i class="fas fa-briefcase"></i>
+        <span class="stat-number">5</span>
+        <span class="stat-label">Work Experiences</span>
+      </div>
+      <div class="stat-item">
+        <i class="fas fa-code"></i>
+        <span class="stat-number">10+</span>
+        <span class="stat-label">Skills</span>
+      </div>
+      <div class="stat-item">
+        <i class="fas fa-certificate"></i>
+        <span class="stat-number">5</span>
+        <span class="stat-label">Certifications</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== RECENT PROJECTS PREVIEW ====== -->
   <section class="section-card">
     <div class="container">
-      <h2 class="section-title"><i class="fas fa-user-astronaut"></i> About Me</h2>
-      <div class="about-grid">
-        <div class="about-image">
-          <div class="profile-picture">
-            <i class="fas fa-user-circle"></i>
+      <h2 class="section-title"><i class="fas fa-project-diagram"></i> Recent Projects</h2>
+      <div class="project-grid">
+        
+        <!-- Web Portfolio - Click whole card to open -->
+        <a href="portfolio.html" class="project-card-link">
+          <div class="project-card">
+            <div class="project-icon"><i class="fas fa-laptop-code"></i></div>
+            <h3>Web Portfolio</h3>
+            <p>Responsive personal website built with HTML, CSS, and JavaScript.</p>
+            <span class="project-tag">HTML</span>
+            <span class="project-tag">CSS</span>
+            <span class="project-tag">JS</span>
+            <div class="project-link-hint"><i class="fas fa-arrow-right"></i> View Project</div>
           </div>
-          <div class="about-actions">
-            <a href="#" class="btn btn-primary"><i class="fas fa-download"></i> Download CV</a>
-          </div>
-        </div>
-        <div class="about-content">
-          <h3>Hi, I'm Monica!</h3>
-          <p>
-            Dedicated Computer Science student at DMMMSU-SLUC, combining strong 
-            analytical thinking, effective communication, and proven time management 
-            skills from academic and volunteer experiences.
-          </p>
-          <p>
-            Passionate about building innovative web solutions, I am excited to 
-            bring my technical expertise and collaborative spirit to an internship 
-            where I can deliver results, support team goals, and accelerate my 
-            professional growth in a challenging, fast-paced setting.
-          </p>
-          <div class="about-details">
-            <div><strong>Full Name:</strong> Monica R. Amer</div>
-            <div><strong>Age:</strong> 21</div>
-            <div><strong>Birthplace:</strong> Agoo, La Union</div>
-            <div><strong>Civil Status:</strong> Single</div>
-            <div><strong>Course:</strong> Bachelor of Science in Computer Science</div>
-            <div><strong>University:</strong> DMMMSU – SLUC</div>
-            <div><strong>Year Level:</strong> 4th Year</div>
-            <div><strong>Location:</strong> San Benito Sur, Aringay, La Union</div>
-          </div>
-        </div>
-      </div>
+        </a>
 
-      <!-- Personal Data Sheet Snapshot -->
-      <div class="pds-snapshot">
-        <h3><i class="fas fa-id-card"></i> PDS Quick Reference</h3>
-        <div class="pds-grid">
-          <div><span class="pds-label">Height:</span> 165 cm</div>
-          <div><span class="pds-label">Weight:</span> 71 kg</div>
-          <div><span class="pds-label">Blood Type:</span> B+</div>
-          <div><span class="pds-label">National ID:</span> 2790‑7418‑5489‑1057</div>
-          <div><span class="pds-label">ID Issued:</span> 26/03/2024</div>
-          <div><span class="pds-label">Languages:</span> English, Filipino, Iloco</div>
-        </div>
+        <!-- Student Management System - Click whole card to open -->
+        <a href="#" class="project-card-link" onclick="alert('🚀 Student Management System Project\n\nThis project is a CRUD application built with Python and SQLite.\n\n📂 GitHub Repository: Coming soon!\n\nClick OK to view the code on GitHub.')">
+          <div class="project-card">
+            <div class="project-icon"><i class="fas fa-database"></i></div>
+            <h3>Student Management System</h3>
+            <p>Basic CRUD application for managing student records.</p>
+            <span class="project-tag">Python</span>
+            <span class="project-tag">SQLite</span>
+            <div class="project-link-hint"><i class="fas fa-arrow-right"></i> View Project</div>
+          </div>
+        </a>
+
+        <!-- Calculator App - Click whole card to open -->
+        <a href="calculator.html" class="project-card-link">
+          <div class="project-card">
+            <div class="project-icon"><i class="fas fa-calculator"></i></div>
+            <h3>Calculator App</h3>
+            <p>Simple calculator built with HTML, CSS, and JavaScript.</p>
+            <span class="project-tag">HTML</span>
+            <span class="project-tag">CSS</span>
+            <span class="project-tag">JS</span>
+            <div class="project-link-hint"><i class="fas fa-arrow-right"></i> Open Calculator</div>
+          </div>
+        </a>
+
       </div>
     </div>
   </section>

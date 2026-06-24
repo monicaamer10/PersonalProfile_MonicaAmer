@@ -3,65 +3,256 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Calculator · Monica R. Amer</title>
+  <title>Calculator App · Monica Amer</title>
   <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="css/calculator.css" />
-  <link rel="icon" href="assets/icons/favicon.ico" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <style>
+    /* Calculator specific styles */
+    .calculator-container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      background: linear-gradient(145deg, #1a2a3a, #2d5a8a);
+      border-radius: 2rem;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+
+    .calculator-display {
+      background: rgba(255,255,255,0.95);
+      padding: 20px;
+      border-radius: 1rem;
+      margin-bottom: 20px;
+      text-align: right;
+      min-height: 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .calculator-display .expression {
+      font-size: 1rem;
+      color: #3d5a78;
+      min-height: 24px;
+    }
+
+    .calculator-display .result {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #1a2a3a;
+      word-break: break-all;
+    }
+
+    .calculator-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .calc-btn {
+      padding: 20px;
+      border: none;
+      border-radius: 1rem;
+      font-size: 1.2rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      background: rgba(255,255,255,0.9);
+      color: #1a2a3a;
+    }
+
+    .calc-btn:hover {
+      transform: scale(0.95);
+    }
+
+    .calc-btn.operator {
+      background: #d4a853;
+      color: white;
+    }
+
+    .calc-btn.operator:hover {
+      background: #c49a3e;
+    }
+
+    .calc-btn.equals {
+      background: #3a9b8e;
+      color: white;
+    }
+
+    .calc-btn.equals:hover {
+      background: #2d8a7e;
+    }
+
+    .calc-btn.clear {
+      background: #e74c3c;
+      color: white;
+    }
+
+    .calc-btn.clear:hover {
+      background: #c0392b;
+    }
+
+    .calc-btn.span-two {
+      grid-column: span 2;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 20px;
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+
+    .calc-title {
+      text-align: center;
+      color: white;
+      margin-bottom: 20px;
+    }
+
+    .calc-title h2 {
+      font-size: 1.8rem;
+      margin-bottom: 0;
+    }
+
+    .calc-title p {
+      opacity: 0.8;
+      margin-top: 0;
+    }
+  </style>
 </head>
 <body>
-  <nav class="navbar">
-    <div class="container nav-container">
-      <div class="nav-logo">MONICA R. AMER<span></span></div>
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="portfolio.html">Portfolio</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </div>
-  </nav>
 
-  <section class="section-card">
-    <div class="container">
-      <h2 class="section-title"><i class="fas fa-calculator"></i> Calculator</h2>
-      <div class="calculator-wrapper">
-        <div class="calculator" id="calculator">
-          <input type="text" id="display" class="calc-display" readonly />
-          <div class="calc-keys">
-            <button data-action="clear">C</button>
-            <button data-action="del">⌫</button>
-            <button data-action="percent">%</button>
-            <button data-value="/">÷</button>
-
-            <button data-value="7">7</button>
-            <button data-value="8">8</button>
-            <button data-value="9">9</button>
-            <button data-value="*">×</button>
-
-            <button data-value="4">4</button>
-            <button data-value="5">5</button>
-            <button data-value="6">6</button>
-            <button data-value="-">−</button>
-
-            <button data-value="1">1</button>
-            <button data-value="2">2</button>
-            <button data-value="3">3</button>
-            <button data-value="+">+</button>
-
-            <button data-value="0">0</button>
-            <button data-value=".">.</button>
-            <button data-action="equals" class="equals">=</button>
-          </div>
+  <div style="max-width: 1100px; margin: 0 auto; padding: 2rem 1.2rem;">
+    
+    <!-- Navigation -->
+    <nav class="navbar" style="margin: 0 0 2rem 0;">
+      <div class="container nav-container" style="padding: 0;">
+        <div class="nav-logo">MONICA R. AMER<span></span></div>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="skills.html">Skills</a></li>
+          <li><a href="education.html">Education</a></li>
+          <li><a href="experience.html">Experience</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="nav-toggle" id="navToggle">
+          <i class="fas fa-bars"></i>
         </div>
       </div>
-    </div>
-  </section>
+    </nav>
 
-  <footer>
-    <div class="container">
-      <p><i class="far fa-copyright"></i> 2026 Monica R. Amer</p>
-    </div>
-  </footer>
+    <!-- Calculator -->
+    <div class="calculator-container">
+      <div class="calc-title">
+        <h2><i class="fas fa-calculator"></i> Calculator</h2>
+        <p>Simple calculator app</p>
+      </div>
 
-  <script src="js/calculator.js"></script>
+      <div class="calculator-display">
+        <div class="expression" id="expression"></div>
+        <div class="result" id="result">0</div>
+      </div>
+
+      <div class="calculator-grid">
+        <button class="calc-btn clear" onclick="clearAll()">C</button>
+        <button class="calc-btn" onclick="deleteLast()">⌫</button>
+        <button class="calc-btn" onclick="appendValue('%')">%</button>
+        <button class="calc-btn operator" onclick="appendValue('/')">÷</button>
+
+        <button class="calc-btn" onclick="appendValue('7')">7</button>
+        <button class="calc-btn" onclick="appendValue('8')">8</button>
+        <button class="calc-btn" onclick="appendValue('9')">9</button>
+        <button class="calc-btn operator" onclick="appendValue('*')">×</button>
+
+        <button class="calc-btn" onclick="appendValue('4')">4</button>
+        <button class="calc-btn" onclick="appendValue('5')">5</button>
+        <button class="calc-btn" onclick="appendValue('6')">6</button>
+        <button class="calc-btn operator" onclick="appendValue('-')">−</button>
+
+        <button class="calc-btn" onclick="appendValue('1')">1</button>
+        <button class="calc-btn" onclick="appendValue('2')">2</button>
+        <button class="calc-btn" onclick="appendValue('3')">3</button>
+        <button class="calc-btn operator" onclick="appendValue('+')">+</button>
+
+        <button class="calc-btn span-two" onclick="appendValue('0')">0</button>
+        <button class="calc-btn" onclick="appendValue('.')">.</button>
+        <button class="calc-btn equals" onclick="calculate()">=</button>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 20px;">
+      <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Home</a>
+    </div>
+  </div>
+
+  <script>
+    // Calculator JavaScript
+    let expression = '';
+    let result = '0';
+
+    function appendValue(value) {
+      expression += value;
+      document.getElementById('expression').textContent = expression;
+      document.getElementById('result').textContent = expression;
+    }
+
+    function clearAll() {
+      expression = '';
+      result = '0';
+      document.getElementById('expression').textContent = '';
+      document.getElementById('result').textContent = '0';
+    }
+
+    function deleteLast() {
+      expression = expression.slice(0, -1);
+      document.getElementById('expression').textContent = expression;
+      document.getElementById('result').textContent = expression || '0';
+    }
+
+    function calculate() {
+      try {
+        // Replace display symbols with actual operators
+        let calcExpression = expression
+          .replace(/×/g, '*')
+          .replace(/÷/g, '/')
+          .replace(/−/g, '-');
+        
+        const result = Function('"use strict"; return (' + calcExpression + ')')();
+        document.getElementById('result').textContent = result;
+        document.getElementById('expression').textContent = expression + ' =';
+        expression = String(result);
+      } catch (e) {
+        document.getElementById('result').textContent = 'Error';
+        setTimeout(() => {
+          clearAll();
+        }, 1000);
+      }
+    }
+
+    // Keyboard support
+    document.addEventListener('keydown', function(e) {
+      const key = e.key;
+      if (key >= '0' && key <= '9') appendValue(key);
+      else if (key === '+') appendValue('+');
+      else if (key === '-') appendValue('-');
+      else if (key === '*') appendValue('*');
+      else if (key === '/') appendValue('/');
+      else if (key === '.') appendValue('.');
+      else if (key === 'Enter') calculate();
+      else if (key === 'Backspace') deleteLast();
+      else if (key === 'Escape') clearAll();
+    });
+
+    // Mobile nav toggle
+    document.getElementById('navToggle').addEventListener('click', function() {
+      document.querySelector('.nav-links').classList.toggle('open');
+    });
+  </script>
 </body>
 </html>

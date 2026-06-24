@@ -77,30 +77,45 @@
     <div class="container">
       <h2 class="section-title"><i class="fas fa-project-diagram"></i> Recent Projects</h2>
       <div class="project-grid">
-        <div class="project-card">
-          <div class="project-icon"><i class="fas fa-laptop-code"></i></div>
-          <h3>Web Portfolio</h3>
-          <p>Responsive personal website built with HTML, CSS, and JavaScript.</p>
-          <span class="project-tag">HTML</span>
-          <span class="project-tag">CSS</span>
-          <span class="project-tag">JS</span>
-        </div>
-        <div class="project-card">
-          <div class="project-icon"><i class="fas fa-database"></i></div>
-          <h3>Student Management System</h3>
-          <p>Basic CRUD application for managing student records.</p>
-          <span class="project-tag">Python</span>
-          <span class="project-tag">SQLite</span>
-        </div>
-        <div class="project-card">
-          <div class="project-icon"><i class="fas fa-calculator"></i></div>
-          <h3>Calculator App</h3>
-          <p>Simple calculator built with HTML, CSS, and JavaScript. Click to open the live demo.</p>
-          <span class="project-tag">HTML</span>
-          <span class="project-tag">CSS</span>
-          <span class="project-tag">JS</span>
-          <div style="margin-top:8px;"><a href="calculator.html" class="btn btn-small btn-secondary"><i class="fas fa-external-link-alt"></i> Open Calculator</a></div>
-        </div>
+        
+        <!-- Web Portfolio - Click whole card to open -->
+        <a href="portfolio.html" class="project-card-link">
+          <div class="project-card">
+            <div class="project-icon"><i class="fas fa-laptop-code"></i></div>
+            <h3>Web Portfolio</h3>
+            <p>Responsive personal website built with HTML, CSS, and JavaScript.</p>
+            <span class="project-tag">HTML</span>
+            <span class="project-tag">CSS</span>
+            <span class="project-tag">JS</span>
+            <div class="project-link-hint"><i class="fas fa-arrow-right"></i> View Project</div>
+          </div>
+        </a>
+
+        <!-- Student Management System - Click whole card to open -->
+        <a href="#" class="project-card-link" onclick="alert('🚀 Student Management System Project\n\nThis project is a CRUD application built with Python and SQLite.\n\n📂 GitHub Repository: Coming soon!\n\nClick OK to view the code on GitHub.')">
+          <div class="project-card">
+            <div class="project-icon"><i class="fas fa-database"></i></div>
+            <h3>Student Management System</h3>
+            <p>Basic CRUD application for managing student records.</p>
+            <span class="project-tag">Python</span>
+            <span class="project-tag">SQLite</span>
+            <div class="project-link-hint"><i class="fas fa-arrow-right"></i> View Project</div>
+          </div>
+        </a>
+
+        <!-- Calculator App - Click whole card to open -->
+        <a href="calculator.html" class="project-card-link">
+          <div class="project-card">
+            <div class="project-icon"><i class="fas fa-calculator"></i></div>
+            <h3>Calculator App</h3>
+            <p>Simple calculator built with HTML, CSS, and JavaScript.</p>
+            <span class="project-tag">HTML</span>
+            <span class="project-tag">CSS</span>
+            <span class="project-tag">JS</span>
+            <div class="project-link-hint"><i class="fas fa-arrow-right"></i> Open Calculator</div>
+          </div>
+        </a>
+
       </div>
     </div>
   </section>
