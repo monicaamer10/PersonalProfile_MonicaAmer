@@ -67,13 +67,69 @@ if (contactForm) {
     const name = document.getElementById('name');
     const email = document.getElementById('email');
     const message = document.getElementById('message');
+    const statusBox = document.getElementById('formStatus');
 
-    if (name && email && message) {
+    if (name && email && message && statusBox) {
+      statusBox.className = 'form-status';
+      statusBox.textContent = 'Sending...';
+
       if (name.value.trim() && email.value.trim() && message.value.trim()) {
-        alert('✅ Thank you, ' + name.value + '! Your message has been sent.\n\n(Note: This is a demo. Add backend functionality to actually send emails.)');
-        this.reset();
+        const apiUrl = window.location.protocol === 'file:'
+          ? 'http://localhost:8081/api/contact'
+          : '/api/contact';
+
+        const payload = {
+          name: name.value.trim(),
+          email: email.value.trim(),
+          message: message.value.trim(),
+        };
+
+        const saveLocalMessage = (messageData) => {
+          const savedMessages = JSON.parse(localStorage.getItem('contactMessages') || '[]');
+          savedMessages.unshift({
+            id: `local-${Date.now()}`,
+            ...messageData,
+            sentAt: new Date().toISOString(),
+          });
+          localStorage.setItem('contactMessages', JSON.stringify(savedMessages));
+        };
+
+        fetch(apiUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(payload),
+        })
+          .then(async response => {
+            const contentType = response.headers.get('content-type') || '';
+            if (contentType.includes('application/json')) {
+              return response.json();
+            }
+            const text = await response.text();
+            return { success: response.ok, error: text || 'Unable to send message.' };
+          })
+          .then(data => {
+            if (data.success) {
+              statusBox.className = 'form-status success';
+              statusBox.textContent = data.message || '✅ Your message was sent successfully. Thank you!';
+              this.reset();
+            } else {
+              statusBox.className = 'form-status error';
+              statusBox.textContent = '⚠️ ' + (data.error || 'Unable to send message.');
+            }
+          })
+          .catch(error => {
+            saveLocalMessage(payload);
+
+            console.error('Contact submit error:', error);
+            statusBox.className = 'form-status success';
+            statusBox.textContent = '✅ Your message was saved locally. It will appear in Messages.';
+            this.reset();
+          });
       } else {
-        alert('⚠️ Please fill in all fields.');
+        statusBox.className = 'form-status error';
+        statusBox.textContent = '⚠️ Please fill in all fields.';
       }
     }
   });

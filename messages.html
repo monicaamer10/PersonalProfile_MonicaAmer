@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Messages</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container nav-container">
+      <div class="nav-logo">MONICA R. AMER<span></span></div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="messages.html" class="active">Messages</a></li>
+      </ul>
+      <div class="nav-toggle" id="navToggle">
+        <i class="fas fa-bars"></i>
+      </div>
+    </div>
+  </nav>
+
+  <section class="section-card">
+    <div class="container">
+      <div class="app-header">
+        <div>
+          <p class="eyebrow">Contact Form</p>
+          <h2 class="section-title"><i class="fas fa-envelope"></i> Messages</h2>
+          <p class="app-description">All messages submitted through the contact form appear here.</p>
+        </div>
+        <a href="contact.html" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Back to Contact</a>
+      </div>
+
+      <div id="messagesList" class="messages-list"></div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p><i class="far fa-copyright"></i> 2026 Monica R. Amer · Built with <i class="fas fa-heart"></i> and AI</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/messages.js"></script>
+</body>
+</html>
