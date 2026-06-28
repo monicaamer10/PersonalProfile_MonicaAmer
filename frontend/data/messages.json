@@ -19,12 +19,5 @@
     "email": "hanna@gmail.com",
     "message": "reply if you see this",
     "createdAt": "2026-06-28T02:29:41.860Z"
-  },
-  {
-    "id": "1782530262972",
-    "name": "Test User",
-    "email": "test@example.com",
-    "message": "Hello from the messages page check",
-    "createdAt": "2026-06-27T03:17:42.972Z"
   }
 ]
