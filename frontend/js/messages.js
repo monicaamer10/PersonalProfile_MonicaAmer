@@ -1,6 +1,22 @@
 const messagesList = document.getElementById('messagesList');
 const LOCAL_STORAGE_KEY = 'contactMessages';
 
+function getApiOrigin() {
+  if (window.location.protocol === 'file:') {
+    return 'http://localhost:5000';
+  }
+
+  if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+    return 'http://localhost:5000';
+  }
+
+  return 'https://monica-profile-backend.onrender.com';
+}
+
+function getApiUrl(path) {
+  return `${getApiOrigin()}/api/${path}`;
+}
+
 function getSavedMessages() {
   const stored = localStorage.getItem(LOCAL_STORAGE_KEY);
   if (!stored) return [];
@@ -62,9 +78,7 @@ async function loadMessages() {
   const localMessages = getSavedMessages();
 
   try {
-    const apiUrl = window.location.protocol === 'file:'
-      ? 'http://localhost:8081/api/messages'
-      : '/api/messages';
+    const apiUrl = getApiUrl('messages');
 
     const response = await fetch(apiUrl);
     const data = await response.json();
@@ -107,9 +121,7 @@ messagesList?.addEventListener('click', async (event) => {
   }
 
   try {
-    const deleteUrl = window.location.protocol === 'file:'
-      ? `http://localhost:8081/api/messages/${encodeURIComponent(messageId)}`
-      : `/api/messages/${encodeURIComponent(messageId)}`;
+    const deleteUrl = `${getApiUrl(`messages/${encodeURIComponent(messageId)}`)}`;
 
     const response = await fetch(deleteUrl, { method: 'DELETE' });
     const contentType = response.headers.get('content-type') || '';

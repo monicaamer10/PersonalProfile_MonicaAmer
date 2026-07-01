@@ -1,4 +1,70 @@
 // ============================================
+// API HOST RESOLUTION
+// ============================================
+const API_HOSTS = {
+  local: 'http://localhost:5000',
+  hosted: 'https://monica-profile-backend.onrender.com'
+};
+
+function getApiOrigin() {
+  if (window.location.protocol === 'file:') {
+    return API_HOSTS.local;
+  }
+
+  if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+    return API_HOSTS.local;
+  }
+
+  return API_HOSTS.hosted;
+}
+
+function getApiUrl(path) {
+  const origin = getApiOrigin();
+  return `${origin}/api/${path}`;
+}
+
+async function loadProfileData() {
+  try {
+    const response = await fetch(getApiUrl('profile'));
+    if (!response.ok) throw new Error('Profile API unavailable');
+
+    const profile = await response.json();
+    const heroName = document.getElementById('heroName');
+    const heroSubtitle = document.getElementById('heroSubtitle');
+    const heroInstitution = document.getElementById('heroInstitution');
+    const statEducation = document.getElementById('statEducation');
+    const statExperience = document.getElementById('statExperience');
+    const statSkills = document.getElementById('statSkills');
+    const statCertifications = document.getElementById('statCertifications');
+    const techStackList = document.getElementById('techStackList');
+    const aboutDetails = document.getElementById('aboutDetails');
+
+    if (heroName && profile.name) heroName.textContent = profile.name;
+    if (heroSubtitle && profile.course) heroSubtitle.textContent = profile.course;
+    if (heroInstitution && profile.university) heroInstitution.innerHTML = `<i class="fas fa-university"></i> ${profile.university}`;
+    if (statEducation && Array.isArray(profile.education)) statEducation.textContent = profile.education.length;
+    if (statExperience && Array.isArray(profile.experience)) statExperience.textContent = profile.experience.length;
+    if (statSkills && Array.isArray(profile.skills)) statSkills.textContent = profile.skills.length;
+    if (statCertifications && Array.isArray(profile.certifications)) statCertifications.textContent = profile.certifications.length;
+    if (techStackList && Array.isArray(profile.techStack)) {
+      techStackList.textContent = 'Technologies used: ' + profile.techStack.join(', ') + '.';
+    }
+
+    if (aboutDetails) {
+      const skillList = Array.isArray(profile.skills) ? profile.skills.join(', ') : 'HTML, CSS, JavaScript, Python';
+      aboutDetails.innerHTML = `
+        <div><strong>Location:</strong> ${profile.location || 'Aringay, La Union'}</div>
+        <div><strong>Field:</strong> ${profile.course || 'Computer Science'}</div>
+        <div><strong>Skills:</strong> ${skillList}</div>
+        <div><strong>Interests:</strong> Web apps, UX/UI, AI, software design</div>
+      `;
+    }
+  } catch (error) {
+    console.warn('Unable to load profile data:', error);
+  }
+}
+
+// ============================================
 // MOBILE NAVIGATION TOGGLE
 // ============================================
 document.addEventListener('DOMContentLoaded', function() {
@@ -74,9 +140,7 @@ if (contactForm) {
       statusBox.textContent = 'Sending...';
 
       if (name.value.trim() && email.value.trim() && message.value.trim()) {
-        const apiUrl = window.location.protocol === 'file:'
-          ? 'http://localhost:8081/api/contact'
-          : '/api/contact';
+        const apiUrl = getApiUrl('contact');
 
         const payload = {
           name: name.value.trim(),

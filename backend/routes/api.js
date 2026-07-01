@@ -1,41 +1,185 @@
 const express = require('express');
+const fs = require('fs');
+const path = require('path');
+const mongoose = require('mongoose');
 const router = express.Router();
-const Message = require('../models/Message');
+const Message = require('../models/message');
 const nodemailer = require('nodemailer');
 
+// ============================================
+// ENVIRONMENT CHECK
+// ============================================
+const isProduction = process.env.NODE_ENV === 'production';
+console.log(`📡 API running in ${process.env.NODE_ENV || 'development'} mode`);
+
+// ============================================
+// FILE STORAGE SETUP
+// ============================================
+const dataDir = path.join(__dirname, '..', 'data');
+const messagesFile = path.join(dataDir, 'messages.json');
+
+function ensureMessagesFile() {
+  if (!fs.existsSync(dataDir)) {
+    fs.mkdirSync(dataDir, { recursive: true });
+  }
+  if (!fs.existsSync(messagesFile)) {
+    fs.writeFileSync(messagesFile, '[]', 'utf8');
+  }
+}
+
+function loadMessages() {
+  ensureMessagesFile();
+  try {
+    return JSON.parse(fs.readFileSync(messagesFile, 'utf8')) || [];
+  } catch (error) {
+    return [];
+  }
+}
+
+function saveMessages(messages) {
+  ensureMessagesFile();
+  fs.writeFileSync(messagesFile, JSON.stringify(messages, null, 2), 'utf8');
+}
+
+function isDatabaseReady() {
+  return mongoose.connection.readyState === 1;
+}
+
+console.log(`💾 Database: ${isDatabaseReady() ? 'MongoDB' : 'File Storage'}`);
+
+// ============================================
 // GET: All messages (for admin)
+// ============================================
 router.get('/messages', async (req, res) => {
   try {
-    const messages = await Message.find().sort({ createdAt: -1 });
-    res.json(messages);
+    if (isDatabaseReady()) {
+      const messages = await Message.find().sort({ createdAt: -1 });
+      return res.json({ messages, source: 'mongodb' });
+    }
+
+    const messages = loadMessages();
+    return res.json({ messages, source: 'file' });
+  } catch (error) {
+    console.error('GET /messages error:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// ============================================
+// DELETE: Remove a message by ID
+// ============================================
+router.delete('/messages/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    if (isDatabaseReady()) {
+      await Message.findByIdAndDelete(id);
+    } else {
+      const messages = loadMessages();
+      const filteredMessages = messages.filter(msg => msg.id !== id);
+      saveMessages(filteredMessages);
+    }
+
+    res.json({ success: true, message: 'Message deleted successfully' });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
 
+// ============================================
 // POST: Save contact message
+// ============================================
 router.post('/contact', async (req, res) => {
   try {
     const { name, email, message } = req.body;
-    
-    // Save to database
-    const newMessage = new Message({ name, email, message });
-    await newMessage.save();
+
+    if (!name || !email || !message) {
+      return res.status(400).json({ success: false, error: 'Please fill in all fields.' });
+    }
+
+    const messageData = {
+      name,
+      email,
+      message,
+      createdAt: new Date(),
+    };
+
+    let savedMessage;
+
+    if (isDatabaseReady()) {
+      const newMessage = new Message(messageData);
+      savedMessage = await newMessage.save();
+    } else {
+      const messages = loadMessages();
+      messages.unshift({
+        id: `local-${Date.now()}-${Math.random().toString(16).slice(2)}`,
+        ...messageData,
+      });
+      saveMessages(messages);
+      savedMessage = messages[0];
+    }
 
     // Send email notification (optional)
-    // await sendEmail(name, email, message);
+    try {
+      await sendEmailNotification(name, email, message);
+    } catch (emailError) {
+      console.warn('Email notification failed:', emailError.message);
+    }
 
     res.status(201).json({ 
       success: true, 
       message: 'Message sent successfully!',
-      data: newMessage 
+      data: savedMessage,
+      source: isDatabaseReady() ? 'mongodb' : 'file'
     });
   } catch (error) {
+    console.error('POST /contact error:', error);
     res.status(500).json({ error: error.message });
   }
 });
 
+// ============================================
+// EMAIL NOTIFICATION FUNCTION
+// ============================================
+async function sendEmailNotification(name, email, message) {
+  try {
+    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+      console.log('Email not configured, skipping notification');
+      return;
+    }
+
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
+
+    await transporter.sendMail({
+      from: process.env.EMAIL_USER,
+      to: 'amermonica1018@gmail.com',
+      subject: `New Contact Message from ${name}`,
+      html: `
+        <h2>📨 New Contact Message</h2>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Message:</strong></p>
+        <p style="background: #f5f5f5; padding: 15px; border-radius: 5px;">${message}</p>
+        <p><small>Sent at: ${new Date().toLocaleString()}</small></p>
+      `,
+    });
+
+    console.log('✅ Email notification sent');
+  } catch (error) {
+    console.error('Email error:', error);
+    throw error;
+  }
+}
+
+// ============================================
 // GET: Profile data
+// ============================================
 router.get('/profile', (req, res) => {
   res.json({
     name: 'Monica R. Amer',
@@ -106,6 +250,9 @@ router.get('/profile', (req, res) => {
       'SPES 2024 - Municipality of Aringay',
       'SPES 2023 - Municipality of Aringay',
       'OJT Certificate - MSWDO Aringay (2023)'
+    ],
+    techStack: [
+      'HTML', 'CSS', 'JavaScript', 'Node.js', 'Express', 'MongoDB', 'Git', 'GitHub', 'Python'
     ]
   });
 });
