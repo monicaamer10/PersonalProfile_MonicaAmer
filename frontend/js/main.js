@@ -23,6 +23,9 @@ function getApiUrl(path) {
   return `${origin}/api/${path}`;
 }
 
+// ============================================
+// LOAD PROFILE DATA
+// ============================================
 async function loadProfileData() {
   try {
     const response = await fetch(getApiUrl('profile'));
@@ -75,14 +78,17 @@ document.addEventListener('DOMContentLoaded', function() {
     navToggle.addEventListener('click', function() {
       navLinks.classList.toggle('open');
     });
+
+    // Close mobile nav when a link is clicked
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+      });
+    });
   }
 
-  // Close mobile nav when a link is clicked
-  navLinks.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      navLinks.classList.remove('open');
-    });
-  });
+  // Load profile data on page load
+  loadProfileData();
 
   console.log('✅ Monica R. Amer · Personal Profile loaded');
   console.log('📌 Built with HTML, CSS, JavaScript');
@@ -106,14 +112,14 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // ============================================
-// UPDATE SOCIAL MEDIA LINKS (Replace with your actual links)
+// UPDATE SOCIAL MEDIA LINKS
 // ============================================
-// You can update these with your actual profile URLs
+// UPDATE THESE WITH YOUR ACTUAL PROFILE URLS!
 const socialLinks = {
-  github: 'https://github.com/your-username',
-  facebook: 'https://facebook.com/your-profile',
-  linkedin: 'https://linkedin.com/in/your-profile',
-  twitter: 'https://twitter.com/your-handle'
+  github: 'https://github.com/monicaamer10',        // ← UPDATE
+  facebook: 'https://facebook.com/monica.amer',     // ← UPDATE
+  linkedin: 'https://linkedin.com/in/monica-amer',  // ← UPDATE
+  twitter: 'https://twitter.com/monica_amer'        // ← UPDATE
 };
 
 document.querySelectorAll('.footer-social a').forEach((link, index) => {
@@ -197,6 +203,46 @@ if (contactForm) {
       }
     }
   });
+}
+
+// ============================================
+// DISPLAY SAVED MESSAGES (Admin view)
+// ============================================
+function displaySavedMessages() {
+  const messagesContainer = document.getElementById('savedMessages');
+  if (!messagesContainer) return;
+
+  const savedMessages = JSON.parse(localStorage.getItem('contactMessages') || '[]');
+  
+  if (savedMessages.length === 0) {
+    messagesContainer.innerHTML = `
+      <div class="empty-messages">
+        <i class="fas fa-inbox"></i>
+        <p>No messages saved yet.</p>
+        <p style="font-size: 0.9rem; margin-top: 0.5rem;">Messages from the contact form will appear here.</p>
+      </div>
+    `;
+    return;
+  }
+
+  messagesContainer.innerHTML = savedMessages.map((msg, index) => `
+    <div class="message-item">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;">
+        <div>
+          <strong>${msg.name || 'Unknown'}</strong>
+          <span class="message-email">(${msg.email || 'No email'})</span>
+          <span class="message-badge">#${index + 1}</span>
+        </div>
+        <span class="message-date">${msg.sentAt ? new Date(msg.sentAt).toLocaleString() : 'Unknown date'}</span>
+      </div>
+      <div class="message-text">${msg.message || 'No message content'}</div>
+    </div>
+  `).join('');
+}
+
+// Call this on pages that have a messages container
+if (document.getElementById('savedMessages')) {
+  displaySavedMessages();
 }
 
 // ============================================

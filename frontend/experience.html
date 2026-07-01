@@ -34,7 +34,9 @@
     <div class="container">
       <h2 class="section-title"><i class="fas fa-briefcase"></i> Work Experience</h2>
 
-      <div class="timeline">
+      <!-- Experience Timeline - Will be dynamically filled by JavaScript -->
+      <div class="timeline" id="experienceTimeline">
+        <!-- Static fallback content (will be replaced by API data) -->
 
         <!-- OJT 2026 - Mayor's Office (NEWEST) -->
         <div class="timeline-item" style="border-left: 4px solid #d4a853; padding-left: 1rem; background: rgba(212, 168, 83, 0.04); border-radius: 0.5rem;">
@@ -94,16 +96,42 @@
       </div>
 
       <!-- ====== EXPERIENCE SUMMARY ====== -->
-      <div style="margin-top: 1.8rem; background: linear-gradient(145deg, #f8fafc, #f0f4f8); padding: 1.2rem 1.5rem; border-radius: 1.2rem; border: 1px solid rgba(255, 255, 255, 0.8);">
+      <div id="experienceSummary" style="margin-top: 1.8rem; background: linear-gradient(145deg, #f8fafc, #f0f4f8); padding: 1.2rem 1.5rem; border-radius: 1.2rem; border: 1px solid rgba(255, 255, 255, 0.8);">
         <h4 style="color: #1a2a3a; margin-bottom: 0.4rem;"><i class="fas fa-chart-bar" style="color: #2d5a8a;"></i> Experience Summary</h4>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0.5rem;">
-          <div><span style="font-weight: 600; color: #2d5a8a;">5</span> Total Work Experiences</div>
-          <div><span style="font-weight: 600; color: #2d5a8a;">3</span> SPES Programs</div>
-          <div><span style="font-weight: 600; color: #2d5a8a;">2</span> OJT Trainings</div>
-          <div><span style="font-weight: 600; color: #2d5a8a;">4</span> Years of Training (2023-2026)</div>
+          <div><span id="totalExperiences" style="font-weight: 600; color: #2d5a8a;">5</span> Total Work Experiences</div>
+          <div><span id="totalSPES" style="font-weight: 600; color: #2d5a8a;">3</span> SPES Programs</div>
+          <div><span id="totalOJT" style="font-weight: 600; color: #2d5a8a;">2</span> OJT Trainings</div>
+          <div><span id="totalYears" style="font-weight: 600; color: #2d5a8a;">4</span> Years of Training (2023-2026)</div>
         </div>
       </div>
 
+    </div>
+  </section>
+
+  <!-- ====== QUICK STATS ====== -->
+  <section class="stats">
+    <div class="container stats-grid">
+      <div class="stat-item">
+        <i class="fas fa-graduation-cap"></i>
+        <span id="statEducation" class="stat-number">4</span>
+        <span class="stat-label">Education Levels</span>
+      </div>
+      <div class="stat-item">
+        <i class="fas fa-briefcase"></i>
+        <span id="statExperience" class="stat-number">5</span>
+        <span class="stat-label">Work Experiences</span>
+      </div>
+      <div class="stat-item">
+        <i class="fas fa-code"></i>
+        <span id="statSkills" class="stat-number">10+</span>
+        <span class="stat-label">Skills</span>
+      </div>
+      <div class="stat-item">
+        <i class="fas fa-certificate"></i>
+        <span id="statCertifications" class="stat-number">5</span>
+        <span class="stat-label">Certifications</span>
+      </div>
     </div>
   </section>
 

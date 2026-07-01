@@ -47,12 +47,11 @@
             </div>
           </div>
 
-
           <div class="contact-item">
             <i class="fas fa-map-pin"></i>
             <div>
               <strong>Address</strong>
-               Aringay, La Union
+              Aringay, La Union
             </div>
           </div>
 
@@ -60,7 +59,7 @@
             <i class="fab fa-github"></i>
             <div>
               <strong>GitHub</strong>
-              <a href="#">github.com/monicaamer10</a>
+              <a href="https://github.com/monicaamer10" target="_blank">github.com/monicaamer10</a>
             </div>
           </div>
 
@@ -68,7 +67,7 @@
             <i class="fab fa-facebook"></i>
             <div>
               <strong>Facebook</strong>
-              <a href="#">fb.com/Monica Amer</a>
+              <a href="#" target="_blank">fb.com/MonicaAmer</a>
             </div>
           </div>
 
@@ -76,25 +75,25 @@
             <i class="fab fa-linkedin"></i>
             <div>
               <strong>LinkedIn</strong>
-              <a href="#">linkedin.com/in/monica-amer</a>
+              <a href="#" target="_blank">linkedin.com/in/monica-amer</a>
             </div>
           </div>
         </div>
 
         <div class="contact-form">
           <h3>Send a Message</h3>
-          <form>
+          <form id="contactForm">
             <div class="form-group">
               <label for="name">Your Name</label>
-              <input type="text" id="name" placeholder="Enter your name" />
+              <input type="text" id="name" placeholder="Enter your name" required />
             </div>
             <div class="form-group">
               <label for="email">Your Email</label>
-              <input type="email" id="email" placeholder="Enter your email" />
+              <input type="email" id="email" placeholder="Enter your email" required />
             </div>
             <div class="form-group">
               <label for="message">Message</label>
-              <textarea id="message" rows="4" placeholder="Write your message here..."></textarea>
+              <textarea id="message" rows="4" placeholder="Write your message here..." required></textarea>
             </div>
             <div id="formStatus" class="form-status" aria-live="polite"></div>
             <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Send Message</button>
@@ -112,15 +111,41 @@
     </div>
   </section>
 
+  <!-- ====== QUICK STATS ====== -->
+  <section class="stats">
+    <div class="container stats-grid">
+      <div class="stat-item">
+        <i class="fas fa-graduation-cap"></i>
+        <span id="statEducation" class="stat-number">4</span>
+        <span class="stat-label">Education Levels</span>
+      </div>
+      <div class="stat-item">
+        <i class="fas fa-briefcase"></i>
+        <span id="statExperience" class="stat-number">5</span>
+        <span class="stat-label">Work Experiences</span>
+      </div>
+      <div class="stat-item">
+        <i class="fas fa-code"></i>
+        <span id="statSkills" class="stat-number">10+</span>
+        <span class="stat-label">Skills</span>
+      </div>
+      <div class="stat-item">
+        <i class="fas fa-certificate"></i>
+        <span id="statCertifications" class="stat-number">5</span>
+        <span class="stat-label">Certifications</span>
+      </div>
+    </div>
+  </section>
+
   <!-- ====== FOOTER ====== -->
   <footer>
     <div class="container">
       <p><i class="far fa-copyright"></i> 2026 Monica R. Amer · Built with <i class="fas fa-heart"></i> and AI</p>
       <div class="footer-social">
-        <a href="#"><i class="fab fa-github"></i></a>
-        <a href="#"><i class="fab fa-facebook"></i></a>
-        <a href="#"><i class="fab fa-linkedin"></i></a>
-        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="https://github.com/monicaamer10" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
+        <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
       </div>
     </div>
   </footer>

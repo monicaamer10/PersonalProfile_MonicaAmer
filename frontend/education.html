@@ -34,7 +34,9 @@
     <div class="container">
       <h2 class="section-title"><i class="fas fa-graduation-cap"></i> Education</h2>
 
-      <div class="timeline">
+      <!-- Education Timeline - Will be dynamically filled by JavaScript -->
+      <div class="timeline" id="educationTimeline">
+        <!-- Static fallback content (will be replaced by API data) -->
         <div class="timeline-item">
           <div class="timeline-icon"><i class="fas fa-university"></i></div>
           <div class="timeline-content">
@@ -78,9 +80,8 @@
 
       <!-- ====== CERTIFICATIONS ====== -->
       <h3 class="skill-category"><i class="fas fa-certificate"></i> Certifications & Trainings</h3>
-      <div class="cert-grid">
-
-        <!-- SPES 2025 -->
+      <div class="cert-grid" id="certGrid">
+        <!-- Static fallback content (will be replaced by API data) -->
         <div class="cert-item">
           <i class="fas fa-certificate" style="color: #d4a853;"></i>
           <div>
@@ -90,7 +91,6 @@
           </div>
         </div>
 
-        <!-- SPES 2024 -->
         <div class="cert-item">
           <i class="fas fa-certificate" style="color: #d4a853;"></i>
           <div>
@@ -100,7 +100,6 @@
           </div>
         </div>
 
-        <!-- SPES 2023 -->
         <div class="cert-item">
           <i class="fas fa-certificate" style="color: #d4a853;"></i>
           <div>
@@ -110,7 +109,6 @@
           </div>
         </div>
 
-        <!-- OJT 2023 -->
         <div class="cert-item">
           <i class="fas fa-certificate" style="color: #3a9b8e;"></i>
           <div>
@@ -120,7 +118,6 @@
           </div>
         </div>
 
-        <!-- JavaScript Essentials 1 -->
         <div class="cert-item">
           <i class="fas fa-certificate" style="color: #2d5a8a;"></i>
           <div>
@@ -129,7 +126,32 @@
             <p class="cert-date"><i class="far fa-calendar-alt"></i> 2026</p>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
 
+  <!-- ====== QUICK STATS ====== -->
+  <section class="stats">
+    <div class="container stats-grid">
+      <div class="stat-item">
+        <i class="fas fa-graduation-cap"></i>
+        <span id="statEducation" class="stat-number">4</span>
+        <span class="stat-label">Education Levels</span>
+      </div>
+      <div class="stat-item">
+        <i class="fas fa-briefcase"></i>
+        <span id="statExperience" class="stat-number">5</span>
+        <span class="stat-label">Work Experiences</span>
+      </div>
+      <div class="stat-item">
+        <i class="fas fa-code"></i>
+        <span id="statSkills" class="stat-number">10+</span>
+        <span class="stat-label">Skills</span>
+      </div>
+      <div class="stat-item">
+        <i class="fas fa-certificate"></i>
+        <span id="statCertifications" class="stat-number">5</span>
+        <span class="stat-label">Certifications</span>
       </div>
     </div>
   </section>
